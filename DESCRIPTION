@@ -1,0 +1,14 @@
+Package: ifctools
+Type: Package
+Title: Italian fiscal code miscellaneous utilities
+Version: 0.1
+Date: 2010-01-27
+Author: Luca Braglia
+Maintainer: Luca Braglia <lbraglia@gmail.com>
+Depends: car
+Description: Provides utility fuctions to deal with italian
+             fiscal codes (check, "guess", ...)
+License: GPL (>=2)
+URL: http://lbraglia.openedhost.com/fs.php#ifctools
+Encoding: UTF-8
+LazyLoad: yes

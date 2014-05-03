@@ -1,1 +1,1 @@
-export(fc.check)
+export("fc_check")

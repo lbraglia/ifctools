@@ -1,4 +1,4 @@
-fc.check <- function(fc) 
+fc_check <- function(fc) 
 {
   ## require(car)
 

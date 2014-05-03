@@ -1,5 +1,5 @@
-\name{fc.check}
-\alias{fc.check}
+\name{fc_check}
+\alias{fc_check}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Check fiscal codes
@@ -15,7 +15,7 @@
 }
 
 \usage{
-fc.check(fc)
+fc_check(fc)
 }
 
 \arguments{
@@ -59,10 +59,10 @@ Law source: D.M. (Ministry of Finance) n. 13813 - 23/12/76 - "Sistemi di
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-  \code{\link{ifctools}}
-  %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+%% \seealso{
+%%   \code{\link{ifctools}}
+%%   %% ~~objects to See Also as \code{\link{help}}, ~~~
+%% }
 \examples{
 
 ## As i've said, the algo is quite draconian. Consider the code
@@ -70,13 +70,13 @@ Law source: D.M. (Ministry of Finance) n. 13813 - 23/12/76 - "Sistemi di
 ## "qWeASd34D12h 221M   " to be (and it's) TRUE, because i consider it
 ## as an error (it's diminishing match probability).
 
-fc.check("qWeASd34D12h 221M   ") 
+fc_check("qWeASd34D12h 221M   ") 
 
 ## So you'll betted do pre-cleaning (upcase and blank trimming)
 
 fc <- c("qWeASd34D12h 221M   ", "12312312312")
 fc <- gsub(" ","", toupper(fc))
-fc.check(fc)
+fc_check(fc)
 
 ## Check results with (i.e.)
 ## http://www.nonsolocap.it/codice-fiscale/controllo/  

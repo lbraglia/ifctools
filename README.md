@@ -2,7 +2,7 @@ ifctools [![Build Status](https://travis-ci.org/lbraglia/ifctools.svg)](https://
 ========
 
 This [R](http://www.r-project.org/) package provides utility
-fuctions to deal with italian fiscal codes.
+fuctions to deal with italian [fiscal codes](http://en.wikipedia.org/wiki/Italian_fiscal_code_card).
 
 Italian fiscal code constitutes a typical id for statistical
 units among different italian datasets. It's a 16 char unique

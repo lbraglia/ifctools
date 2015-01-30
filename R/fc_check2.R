@@ -1,9 +1,10 @@
 #' Check Italian fiscal codes
 #' 
-#' The function performs fiscal codes (both temporary and definitive) check,
-#' computing the last (control) character basing on the others.  The algorithm
-#' is intended to be quite "draconian", so you'll better make some precleaning
-#' (remove blank spaces and upcase) if needed. See examples.
+#' The function performs fiscal codes check (both regular and temporary
+#' ones), computing the last (control) character basing on the others.  The
+#' algorithm is intended to be quite "draconian", so you'll better make
+#' some precleaning (remove blank spaces and upcase) if needed. See
+#' examples.
 #' 
 #' @param fc A character vector of fiscal codes.
 #' @return The function return \code{TRUE} if the fiscal code is wrong,
@@ -13,50 +14,40 @@
 #' tributaria". Supp. ord. G.U. 345 29/12/1976.
 #' @examples
 #' 
-#' ## As i've said, the algo is quite draconian. Consider the code
-#' ## "QWEASD34D12H221M" (fictitious but right). I would like
-#' ## "qWeASd34D12h 221M   " to be (and it's) TRUE (aka error), because i
-#' ## consider it 
-#' ## as an error (it's diminishing match probability).
-#' 
-#' fc_check("qWeASd34D12h 221M   ") 
-#' 
-#' ## So you'll betted do pre-cleaning (upcase and blank trimming)
-#' 
-#' fc <- c("qWeASd34D12h 221M   ", "12312312312")
+#' fc <- c("qWeASd34D12h 221M   ", " 12312312312 ")
+#' fc_check2(fc) 
 #' fc <- gsub(" ","", toupper(fc))
-#' fc_check(fc)
+#' fc_check2(fc)
 #' 
-#' ## Check results with (i.e.)
-#' ## http://www.nonsolocap.it/codice-fiscale/controllo/  
-#' 
-#' @export fc_check
-fc_check <- function(fc) 
+#' @export 
+fc_check2 <- function(fc) 
 {
-    if( ! (is.vector(fc) & typeof(fc)=="character")  )
-        stop("The input must be a character vector.")
+  if( ! (is.character(fc) & is.null(dim(fc))) )
+    stop("The input must be a character vector.")
     
-    ## Matching patterns and dummies
-    dfnt.ptrn <-
-        "[A-Z]{6}\\d{2}[A-Z]{1}\\d{2}[A-Z]{1}\\d{3}[A-Z]{1}" 
-    tmp.ptrn <-  "\\d{11}"
-    definitivo <- grepl( dfnt.ptrn, fc, perl=TRUE)
-    provvisorio <- grepl( tmp.ptrn, fc, perl=TRUE)
+  ## Matching patterns and dummy indexes
+  reg.ptrn <- "[A-Z]{6}\\d{2}[A-Z]{1}\\d{2}[A-Z]{1}\\d{3}[A-Z]{1}" 
+  tmp.ptrn <- "\\d{11}"
+  reg.indx <- grepl(reg.ptrn, fc, perl = TRUE)
+  tmp.indx <- grepl(tmp.ptrn, fc, perl = TRUE)
 
-    ## Return value generation
-    fc.error <- rep(TRUE, length(fc))
-    if (any(definitivo)){                 # Check definitive fc
-        fc.error[definitivo]  <- dfnt.fc.check(fc[definitivo])
-    }
-    if (any(provvisorio)){                # Check temp fc:
-                                        # extended=F cause more
-                                        # testing is needed
-        fc.error[provvisorio] <- tmp.fc.check(fc[provvisorio], extended=FALSE)
-    }                                     
-    fc.error[is.na(fc)]   <- NA
+  ## Results: wrong until proven to be right (unless NA, handled below)
+  fc.error <- rep(TRUE, length(fc))
 
-    ## Return
-    as.logical(fc.error)
+  ## Check regular fc
+  if (any(reg.indx))
+    fc.error[reg.indx] <- reg.fc.check(fc[reg.indx])
+
+  ## Check temporary fc (extended = FALSE causes more testing to be needed)
+  if (any(tmp.indx))
+    fc.error[tmp.indx] <- tmp.fc.check(fc[tmp.indx],
+                                       extended = FALSE)
+
+  ## managing NAs
+  fc.error[is.na(fc)] <- NA
+
+  ## Return
+  fc.error
 }
 
 
@@ -219,9 +210,9 @@ tmp.fc.check.helper <- function(value){
 
 
 
-## Definitive fiscal code main check function
+## Regular fiscal code main check function
 
-dfnt.fc.check <- function(fc){
+reg.fc.check <- function(fc){
     
     uno <- substr(fc, 1,1)
     due <- substr(fc, 2,2)

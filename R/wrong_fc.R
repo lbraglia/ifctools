@@ -39,12 +39,11 @@ wrong_fc <- function(fc)
   if (any(reg_indx))
     fc_error[reg_indx] <-
       .Call("wrong_reg_fc", fc[reg_indx], PACKAGE="ifctools")
-    ## fc_error[reg_indx] <- reg_fc_error(fc[reg_indx])
 
   ## Check temporary fc (extended = FALSE causes more testing to be needed)
-  ## if (any(tmp_indx))
-  ##   fc_error[tmp_indx] <- tmp_fc_error(fc[tmp_indx],
-  ##                                      extended = FALSE)
+  if (any(tmp_indx))
+    fc_error[tmp_indx] <-
+      .Call("wrong_tmp_fc", fc[tmp_indx], PACKAGE="ifctools")
 
   ## managing NAs
   fc_error[is.na(fc)] <- NA
@@ -69,12 +68,7 @@ tmp.fc.check <- function(fc, extended=FALSE){
     otto <- as.numeric(substr(fc, 8,8))
     nove <- as.numeric(substr(fc, 9,9))
     dieci <- as.numeric(substr(fc, 10,10))
-
-    prime7 <- as.numeric(substr(fc, 1,7))
-    coduff <- as.numeric(substr(fc, 8,10))
     check.digit <- as.numeric(substr(fc, 11,11))
-
-    coduff.nullo <- coduff==0
     
     dispari <- uno + tre + cinque + sette + nove
 
@@ -102,6 +96,10 @@ tmp.fc.check <- function(fc, extended=FALSE){
     ## (TODO). La loro applicazione, nella presente implementazione
     ## è legata alla variabile "extended", specificata in sede di
     ## chiamata di tmp.fc.check.
+
+    prime7 <- as.numeric(substr(fc, 1,7))
+    coduff <- as.numeric(substr(fc, 8,10))
+    coduff.nullo <- coduff==0
 
     if(extended) {
         
@@ -207,5 +205,3 @@ tmp.fc.check.helper <- function(value){
     result[value+1]
 
 }
-
-

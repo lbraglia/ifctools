@@ -4,9 +4,9 @@
 #define FC_LEN 16
 #define EVEN(x) ( ((x) % 2) == 0)
 
-int recode_even_digits(char code);
-int recode_odd_digits(char code);
-char recode_remainder(int rem);
+int reg_recode_even_digits(char code);
+int reg_recode_odd_digits(char code);
+char reg_recode_remainder(int rem);
 
 SEXP wrong_reg_fc(SEXP fiscalCodes){
 
@@ -29,8 +29,8 @@ SEXP wrong_reg_fc(SEXP fiscalCodes){
 	/* for each character store the recoded value*/
 	for(j = 0; j < FC_LEN - 1; j++){
 	    recoded[j] = ( EVEN(j + 1) ?
-			   recode_even_digits :
-			   recode_odd_digits)(*(fc + j));
+			   reg_recode_even_digits :
+			   reg_recode_odd_digits)(*(fc + j));
 	}
 
 	/* sum the recoded values */
@@ -38,7 +38,7 @@ SEXP wrong_reg_fc(SEXP fiscalCodes){
 	    sum += recoded[j];
 
 	/* set output  */
-	pres[i] = recode_remainder(sum % 26) != (*(fc + (FC_LEN - 1)));
+	pres[i] = reg_recode_remainder(sum % 26) != (*(fc + (FC_LEN - 1)));
 
 	/* clean */
 	sum = 0;
@@ -50,11 +50,8 @@ SEXP wrong_reg_fc(SEXP fiscalCodes){
     return res;
 }
 
-
-
-
 /*  pari */
-int recode_even_digits(char code){
+int reg_recode_even_digits(char code){
 
     switch(code) {
     case '0':
@@ -101,7 +98,7 @@ int recode_even_digits(char code){
 }
 
 /*  dispari */
-int recode_odd_digits(char code){
+int reg_recode_odd_digits(char code){
 
     switch(code) {
     case '0':
@@ -171,7 +168,7 @@ int recode_odd_digits(char code){
     }    
 }
 
-char recode_remainder(int rem){
+char reg_recode_remainder(int rem){
     return( ((char) rem) + 'A');
 
 }

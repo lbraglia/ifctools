@@ -26,4 +26,5 @@
 #' 
 #' @name ifctools
 #' @docType package
+#' @useDynLib ifctools
 NULL

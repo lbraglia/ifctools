@@ -14,40 +14,43 @@
 #' tributaria". Supp. ord. G.U. 345 29/12/1976.
 #' @examples
 #' 
-#' fc <- c("qWeASd34D12h 221M   ", " 12312312312 ")
-#' fc_check2(fc) 
+#' fc <- c(NA, "qWeASd34D12h 221M   ", " 12312312312 ")
+#' wrong_fc(fc) 
 #' fc <- gsub(" ","", toupper(fc))
-#' fc_check2(fc)
+#' wrong_fc(fc)
 #' 
 #' @export 
-fc_check2 <- function(fc) 
+wrong_fc <- function(fc) 
 {
   if( ! (is.character(fc) & is.null(dim(fc))) )
     stop("The input must be a character vector.")
     
   ## Matching patterns and dummy indexes
-  reg.ptrn <- "[A-Z]{6}\\d{2}[A-Z]{1}\\d{2}[A-Z]{1}\\d{3}[A-Z]{1}" 
-  tmp.ptrn <- "\\d{11}"
-  reg.indx <- grepl(reg.ptrn, fc, perl = TRUE)
-  tmp.indx <- grepl(tmp.ptrn, fc, perl = TRUE)
+  reg_ptrn <- "[A-Z]{6}\\d{2}[A-Z]{1}\\d{2}[A-Z]{1}\\d{3}[A-Z]{1}" 
+  tmp_ptrn <- "\\d{11}"
+  reg_indx <- grepl(reg_ptrn, fc, perl = TRUE)
+  tmp_indx <- grepl(tmp_ptrn, fc, perl = TRUE)
 
   ## Results: wrong until proven to be right (unless NA, handled below)
-  fc.error <- rep(TRUE, length(fc))
+  fc_error <- rep(TRUE, length(fc))
 
-  ## Check regular fc
-  if (any(reg.indx))
-    fc.error[reg.indx] <- reg.fc.check(fc[reg.indx])
+  ## Check regular fc: to keep C side simple, regular and temporary
+  ## codes are checked in two separate functions
+  if (any(reg_indx))
+    fc_error[reg_indx] <-
+      .Call("wrong_reg_fc", fc[reg_indx], PACKAGE="ifctools")
+    ## fc_error[reg_indx] <- reg_fc_error(fc[reg_indx])
 
   ## Check temporary fc (extended = FALSE causes more testing to be needed)
-  if (any(tmp.indx))
-    fc.error[tmp.indx] <- tmp.fc.check(fc[tmp.indx],
-                                       extended = FALSE)
+  ## if (any(tmp_indx))
+  ##   fc_error[tmp_indx] <- tmp_fc_error(fc[tmp_indx],
+  ##                                      extended = FALSE)
 
   ## managing NAs
-  fc.error[is.na(fc)] <- NA
+  fc_error[is.na(fc)] <- NA
 
   ## Return
-  fc.error
+  fc_error
 }
 
 

@@ -9,7 +9,7 @@ library(microbenchmark)
 source("oldsrc/fc_check.R")
 
 ## load vector of fiscal codes (cf)
-load("data/codici_fiscali_test.rda")
+load("../../../cf_raw/codici_fiscali_test.rda")
 length(cf)
 ## do tests with both the algorithms
 microbenchmark(fc <- fc_check(cf),

@@ -3,24 +3,24 @@
 /* compute right check digit */
 char reg_check_digit(const char * fc){
 
-    int recoded[FC_LEN - 1] = {0}; /* recoded digits */
+    int recoded[REG_FC_LEN - 1] = {0}; /* recoded digits */
     int sum = 0;		   /* sum of recoded digits */
     int j;
     /* for each character store the recoded value*/
-    for(j = 0; j < FC_LEN - 1; j++){
-	recoded[j] = ( EVEN(j + 1) ?
+    for(j = 0; j < REG_FC_LEN - 1; j++){
+	recoded[j] = ( IS_EVEN(j + 1) ?
 		       reg_recode_even_digits :
 		       reg_recode_odd_digits)(*(fc + j));
     }
 
     /* sum the recoded values */
-    for(j = 0; j < FC_LEN - 1; j++)
+    for(j = 0; j < REG_FC_LEN - 1; j++)
 	sum += recoded[j];
 
     return reg_recode_remainder(sum % 26);
+    
 }
 
-/*  pari */
 static int reg_recode_even_digits(char code){
 
     switch(code) {
@@ -68,7 +68,6 @@ static int reg_recode_even_digits(char code){
 
 }
 
-/*  dispari */
 static int reg_recode_odd_digits(char code){
 
     switch(code) {

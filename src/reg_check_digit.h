@@ -3,8 +3,6 @@
 
 #include "ifctools.h"
 
-#define EVEN(x) ( ((x) % 2) == 0)
-
 char reg_check_digit(const char * fc);
 static int reg_recode_even_digits(char code);
 static int reg_recode_odd_digits(char code);

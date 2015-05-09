@@ -38,12 +38,12 @@ wrong_fc <- function(fc)
   ## codes are checked in two separate functions
   if (any(reg_indx))
     fc_error[reg_indx] <-
-      .Call("wrong_reg_fc", fc[reg_indx], PACKAGE="ifctools")
+      .Call("reg_wrong_fc", fc[reg_indx], PACKAGE="ifctools")
 
   ## Check temporary fc (extended = FALSE causes more testing to be needed)
   if (any(tmp_indx))
     fc_error[tmp_indx] <-
-      .Call("wrong_tmp_fc", fc[tmp_indx], PACKAGE="ifctools")
+      .Call("tmp_wrong_fc", fc[tmp_indx], PACKAGE="ifctools")
 
   ## managing NAs
   fc_error[is.na(fc)] <- NA

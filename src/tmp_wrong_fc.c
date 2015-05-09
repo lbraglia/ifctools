@@ -7,7 +7,7 @@
 int tmp_recode_even_digits(int code);
 int tmp_recode_odd_digits(int code);
 
-SEXP wrong_tmp_fc(SEXP fiscalCodes){
+SEXP tmp_wrong_fc(SEXP fiscalCodes){
 
     int len = length(fiscalCodes); /* input */
     const char * fc;

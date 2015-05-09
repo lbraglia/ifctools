@@ -3,7 +3,7 @@
 #include "ifctools.h"
 #include "reg_check_digit.h"
 
-SEXP wrong_reg_fc(SEXP fiscalCodes){
+SEXP reg_wrong_fc(SEXP fiscalCodes){
 
     int len = length(fiscalCodes); /* input */
     const char * fc;

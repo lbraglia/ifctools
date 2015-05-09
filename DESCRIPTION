@@ -1,7 +1,7 @@
 Package: ifctools
 Title: Italian Fiscal Code ("Codice Fiscale") Miscellaneous Utilities
-Version: 0.2
-Date: 2015-05-09
+Version: 0.2.1
+Date: 2015-05-10
 Authors@R: person("Luca", "Braglia", email = "lbraglia@gmail.com",
 	          role = c("aut", "cre"))
 Description: Provides utility fuctions to deal with italian fiscal code

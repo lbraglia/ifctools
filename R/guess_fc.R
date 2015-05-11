@@ -52,7 +52,9 @@ guess_fc <- function(surname = NULL,
   }
   
   ## normalize input
+  surname <- toupper(surname)
   surname[surname %in% ""] <- NA
+  name <- toupper(name)
   name[name %in% ""] <- NA
   codice_catastale[codice_catastale %in% ""]  <- NA  
   female <- as.integer(female)
@@ -68,25 +70,16 @@ guess_fc <- function(surname = NULL,
                2, any)
 
   ## return value
-  rval <- .Call("reg_wrong_fc",
-                surname,
-                name,
-                year,
-                month,
-                day,
-                female,
-                codice_catastale,
-                PACKAGE = "ifctools")
-  ## rval <- rep(NA_character_, Len[1])
-  ## rval[!NAS] <- .Call("reg_wrong_fc",
-  ##                     surname[!NAS],
-  ##                     name[!NAS],
-  ##                     year[!NAS],
-  ##                     month[!NAS],
-  ##                     day[!NAS],
-  ##                     female[!NAS],
-  ##                     codice_catastale[!NAS],
-  ##                     PACKAGE = "ifctools")
+  rval <- rep(NA_character_, Len[1])
+  rval[!NAS] <- .Call("reg_guess_fc",
+                      surname[!NAS],
+                      name[!NAS],
+                      year[!NAS],
+                      month[!NAS],
+                      day[!NAS],
+                      female[!NAS],
+                      codice_catastale[!NAS],
+                      PACKAGE = "ifctools")
   rval
 
 }

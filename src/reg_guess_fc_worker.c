@@ -9,31 +9,6 @@ static char * extract_year(int year, char * output);
 static char * extract_month(int month, char * output);
 static char * extract_day(int day, int female, char * output);
 
-/* int main(void){ */
-
-/*     char surname[] = "BRAGLIA"; */
-/*     char name[] = "LUCA"; */
-/*     int year = 1983; */
-/*     int month = 11; */
-/*     int day = 4; */
-/*     int female = 0; */
-/*     char codice_catastale[] = "H223"; */
-    
-/*     char fiscal_code[REG_FC_LEN + 1] = {'\0'}; */
-    
-/*     printf("%s\n", reg_guess_fc_worker(surname, */
-/* 				name, */
-/* 				year, */
-/* 				month, */
-/* 				day, */
-/* 				female, */
-/* 				codice_catastale, */
-/* 				fiscal_code)); */
-    
-/*     return 0; */
-/* } */
-
-
 char * reg_guess_fc_worker(const char * surname,
 			   const char * name,
 			   const int year,

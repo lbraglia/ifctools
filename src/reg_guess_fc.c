@@ -13,37 +13,22 @@ SEXP reg_guess_fc(SEXP surname,
 {
 
     int len = length(surname); /* input length*/
-    int i;			/* a counter */
+    int i;		       /* a counter */
+    char single_fiscal_code[REG_FC_LEN + 1] = {'\0'}; /* single fc buffer */
+    SEXP fiscal_codes = PROTECT(allocVector(STRSXP, len)); /* results */
 
-    const char * Surname;  /* c-level surname */
-    const char * Name;	  /* c-level name */
-    const char * Codice_catastale; /* c-level codice catastale */
-
-    /* a single fiscal code buffer */
-    char single_fiscal_code[REG_FC_LEN + 1] = {'\0'};
-    SEXP fiscal_codes;    /* returned vector of fiscal codes */
-
-    /* allocate results vector */
-    fiscal_codes = PROTECT(allocVector(STRSXP, len));
-    /* move SEXP data of fiscal codes to c-level */
-    
-    
-    /* check each record in turn */
+    /* for each element in turn */
     for(i = 0; i < len; i++){
 
-	Surname = CHAR(STRING_ELT(surname, i));
-	Name    = CHAR(STRING_ELT(name   , i));
-	Codice_catastale = CHAR(STRING_ELT(codice_catastale, i));
-	
 	SET_STRING_ELT(fiscal_codes,
 		       i,
-		       mkChar(reg_guess_fc_worker(Surname,
-						  Name,
+		       mkChar(reg_guess_fc_worker(CHAR(STRING_ELT(surname, i)),
+						  CHAR(STRING_ELT(name, i)),
 						  INTEGER(year)[i],
 						  INTEGER(month)[i],
 						  INTEGER(day)[i],
 						  INTEGER(female)[i],
-						  Codice_catastale,
+						  CHAR(STRING_ELT(codice_catastale, i)),
 						  single_fiscal_code)));
 	memset(single_fiscal_code, '\0', REG_FC_LEN + 1);
     }
@@ -51,6 +36,3 @@ SEXP reg_guess_fc(SEXP surname,
     UNPROTECT(1);
     return fiscal_codes;
 }
-
-
-

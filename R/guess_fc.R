@@ -14,15 +14,14 @@
 #' @return The function return a character vector of fiscal code. 
 #' @examples
 #' 
-#' ## ... using fake data
-#' surnames <- c("Rossi", "Bianchi")
-#' names <- c("Mario", "Giovanna")
-#' birthdates <- as.Date(c("1960-01-01", "1970-01-01"))
-#' comune_of_birth <- c("F205", # milan
+#' ## using fictious data
+#' Surnames <- c("Rossi", "Bianchi")
+#' Names <- c("Mario", "Giovanna")
+#' Birthdates <- as.Date(c("1960-01-01", "1970-01-01"))
+#' Female <- c(FALSE, TRUE)
+#' Comune_of_birth <- c("F205", # milan
 #'                      "H501") # rome
-#' female <- c(FALSE, TRUE)
-#' guess_fc(surnames, names, birthdates, female, comune_of_birth)
-#' ## c("RSSMRA60A01F205T", "BNCGNN70A41H501V")
+#' guess_fc(Surnames, Names, Birthdates, Female, Comune_of_birth)
 #' 
 #' @export 
 guess_fc <- function(surname = NULL,
@@ -69,16 +68,25 @@ guess_fc <- function(surname = NULL,
                2, any)
 
   ## return value
-  rval <- rep(NA_character_, Len[1])
-  rval[!NAS] <- .Call("reg_wrong_fc",
-                      surname[!NAS],
-                      name[!NAS],
-                      year[!NAS],
-                      month[!NAS],
-                      day[!NAS],
-                      female[!NAS],
-                      codice_catastale[!NAS],
-                      PACKAGE = "ifctools")
+  rval <- .Call("reg_wrong_fc",
+                surname,
+                name,
+                year,
+                month,
+                day,
+                female,
+                codice_catastale,
+                PACKAGE = "ifctools")
+  ## rval <- rep(NA_character_, Len[1])
+  ## rval[!NAS] <- .Call("reg_wrong_fc",
+  ##                     surname[!NAS],
+  ##                     name[!NAS],
+  ##                     year[!NAS],
+  ##                     month[!NAS],
+  ##                     day[!NAS],
+  ##                     female[!NAS],
+  ##                     codice_catastale[!NAS],
+  ##                     PACKAGE = "ifctools")
   rval
 
 }

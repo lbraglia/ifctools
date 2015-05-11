@@ -1,5 +1,8 @@
 #include "tmp_check_digit.h"
 
+static int tmp_recode_even_digits(int code);
+static int tmp_recode_odd_digits(int code);
+
 int tmp_check_digit(const char * fc){
 
     int recoded[TMP_FC_LEN - 1] = {0}; /* recoded digits */

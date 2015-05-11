@@ -1,5 +1,9 @@
 #include "reg_check_digit.h"
 
+static int reg_recode_even_digits(char code);
+static int reg_recode_odd_digits(char code);
+static char reg_recode_remainder(int rem);
+
 /* compute right check digit */
 char reg_check_digit(const char * fc){
 

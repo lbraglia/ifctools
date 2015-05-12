@@ -4,7 +4,8 @@
 #include "reg_guess_fc_worker.h"
 
 static int is_vowel(char c);
-static char * extract_letters(const char * source, char * output);
+static char * extract_surname(const char * source, char * output);
+static char * extract_name(const char * source, char * output);
 static char * extract_year(int year, char * output);
 static char * extract_month(int month, char * output);
 static char * extract_day(int day, int female, char * output);
@@ -19,8 +20,8 @@ char * reg_guess_fc_worker(const char * surname,
 			   char * fiscal_code)
 {
     
-    extract_letters(surname, fiscal_code);
-    extract_letters(name,    fiscal_code + 3);
+    extract_surname(surname, fiscal_code);
+    extract_name(name,    fiscal_code + 3);
     extract_year(year,       fiscal_code + 6);        
     extract_month(month,     fiscal_code + 8);
     extract_day(day, female, fiscal_code + 9);
@@ -45,7 +46,7 @@ static int is_vowel(char c){
     }
 }
 
-static char * extract_letters(const char * source, char * output){
+static char * extract_surname(const char * source, char * output){
     char c;			/* considered letter */
     int  i = 0;			/* cycle counter */
     int  ncons = 0;		/* number of consonants  */
@@ -85,6 +86,51 @@ static char * extract_letters(const char * source, char * output){
     
     return output;
 }
+
+static char * extract_name(const char * source, char * output){
+    char c;			/* considered letter */
+    int  i = 0;			/* cycle counter */
+    int  ncons = 0;		/* number of consonants  */
+    int  nvows = 0;		/* number of vowels found */
+    char vowels[3] = {'\0'};
+    static const char X[3] = {'X', 'X', 'X'};
+    
+    /* go through the string and put the consonants in the output */
+    while (((c = *(source + i)) != '\0') && (ncons < 3) ){
+
+	if ( !is_vowel( c )){
+	    /* letter is not a vowel: if it's not a white space too (aka it's a
+	       consonant) put it in the output */  
+	    if( c != ' ') {
+		*(output + ncons++) = c;
+	    }
+	} else {
+	    /* letter is a vowel: put in the vowel buffer (if not already
+	       full) */
+	    if (nvows < 3) {
+		*(vowels + nvows++) = c;
+	    }
+	}
+	
+	i++;
+    }
+
+    /* copy needed vowels */
+    /* 3 - ncons bytes would be needed */
+    /* nvows is what is available */
+    memcpy(output + ncons, vowels, MIN(3 - ncons, nvows));
+
+    /* add needed 'X' */
+    /* 3 - ncons - nvows is what is needed */
+    if (3 - ncons - nvows > 0)
+    	memcpy(output + ncons + nvows, X, 3 - ncons - nvows);
+    
+    return output;
+}
+
+
+
+
 
 static char * extract_year(int year, char * output){
     sprintf(output, "%2d", year % 1900);

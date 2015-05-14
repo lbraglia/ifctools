@@ -6,9 +6,9 @@
 static int is_vowel(char c);
 static char * extract_surname(const char * source, char * output);
 static char * extract_name(const char * source, char * output);
-static char * extract_year(int year, char * output);
-static char * extract_month(int month, char * output);
-static char * extract_day(int day, int female, char * output);
+static char * extract_year(const int year, char * output);
+static char * extract_month(const int month, char * output);
+static char * extract_day(const int day, const int female, char * output);
 
 char * reg_guess_fc_worker(const char * surname,
 			   const char * name,
@@ -140,60 +140,35 @@ static char * extract_name(const char * source, char * output){
     return output;
 }
 
-static char * extract_year(int year, char * output){
-    sprintf(output, "%2d", year % 1900);
+static char * extract_year(const int year, char * output){
+    sprintf(output, "%2d", year % (year < 2000 ? 1900 : 2000) );
     return output;
 }
 
-static char * extract_month(int month, char * output){
+static char * extract_month(const int month, char * output){
 
-    switch (month) {
-    case 1:
-	output[0] = 'A';
-	break;
-    case 2:
-	output[0] = 'B';
-	break;
-    case 3:
-	output[0] = 'C';
-	break;
-    case 4:
-	output[0] = 'D';
-	break;
-    case 5:
-	output[0] = 'E';
-	break;
-    case 6:
-	output[0] = 'H';
-	break;
-    case 7:
-	output[0] = 'L';
-	break;
-    case 8:
-	output[0] = 'M';
-	break;
-    case 9:
-	output[0] = 'P';
-	break;
-    case 10:
-	output[0] = 'R';
-	break;
-    case 11:
-	output[0] = 'S';
-	break;
-    case 12:
-	output[0] = 'T';
-	break;
-    default:
-	break;
-    }
+    static const char months[] = {
+	'A',			/* jan */
+	'B',			/* feb */
+	'C',			/* mar */
+	'D',			/* apr */
+	'E',			/* may */
+	'H',			/* jul */
+	'L',			/* jul */
+	'M',			/* aug */
+	'P',			/* sep */
+	'R',			/* oct */
+	'S',			/* nov */
+	'T'			/* dec */
+    };
 
+    output[0] = months[month - 1];
     return output;
-	   
+
 }
 
 
-char * extract_day(int day, int female, char * output){
+char * extract_day(const int day, const int female, char * output){
     sprintf(output, "%02d", day + 40 * (female != 0));
     return output;
 }

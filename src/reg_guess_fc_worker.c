@@ -21,7 +21,7 @@ char * reg_guess_fc_worker(const char * surname,
 {
     
     extract_surname(surname, fiscal_code);
-    extract_name(name,    fiscal_code + 3);
+    extract_name(name,       fiscal_code + 3);
     extract_year(year,       fiscal_code + 6);        
     extract_month(month,     fiscal_code + 8);
     extract_day(day, female, fiscal_code + 9);
@@ -90,19 +90,20 @@ static char * extract_surname(const char * source, char * output){
 static char * extract_name(const char * source, char * output){
     char c;			/* considered letter */
     int  i = 0;			/* cycle counter */
-    int  ncons = 0;		/* number of consonants  */
+    int  ncons = 0;		/* number of consonants found */
     int  nvows = 0;		/* number of vowels found */
+    char consonants[4] = {'\0'};
     char vowels[3] = {'\0'};
     static const char X[3] = {'X', 'X', 'X'};
     
-    /* go through the string and put the consonants in the output */
-    while (((c = *(source + i)) != '\0') && (ncons < 3) ){
+    /* go through the string and put the consonants in the proper buffer */
+    while (((c = *(source + i)) != '\0') && (ncons < 4) ){
 
 	if ( !is_vowel( c )){
 	    /* letter is not a vowel: if it's not a white space too (aka it's a
-	       consonant) put it in the output */  
-	    if( c != ' ') {
-		*(output + ncons++) = c;
+	       consonant) put it in the consonants */  
+	    if( c != ' ' ) {
+		*(consonants + ncons++) = c;
 	    }
 	} else {
 	    /* letter is a vowel: put in the vowel buffer (if not already
@@ -115,6 +116,17 @@ static char * extract_name(const char * source, char * output){
 	i++;
     }
 
+    /* copy proper consonants */
+    if (ncons == 4){
+	*(output + 0) = *(consonants + 0); /* first */
+	memcpy(output + 1, consonants + 2, 2); /* third and fourth */
+	ncons = 3;			       /* for what follows ncons
+						  need to be the inserted
+						  consonants  */
+    } else {
+	memcpy(output, consonants, ncons);
+    }
+    
     /* copy needed vowels */
     /* 3 - ncons bytes would be needed */
     /* nvows is what is available */
@@ -127,10 +139,6 @@ static char * extract_name(const char * source, char * output){
     
     return output;
 }
-
-
-
-
 
 static char * extract_year(int year, char * output){
     sprintf(output, "%2d", year % 1900);

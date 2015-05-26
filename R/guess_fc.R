@@ -52,9 +52,9 @@ guess_fc <- function(surname = NULL,
   }
   
   ## normalize input
-  surname <- toupper(surname)
+  surname <- keepAlpha(surname)
   surname[surname %in% ""] <- NA
-  name <- toupper(name)
+  name <- keepAlpha(name)
   name[name %in% ""] <- NA
   codice_catastale[codice_catastale %in% ""]  <- NA  
   female <- as.integer(female)
@@ -83,3 +83,6 @@ guess_fc <- function(surname = NULL,
   rval
 
 }
+
+keepAlpha <- function(x)
+  gsub("[^[:alpha:]]", "", toupper(x), perl =TRUE)

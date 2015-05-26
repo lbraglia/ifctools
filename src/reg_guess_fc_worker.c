@@ -58,11 +58,8 @@ static char * extract_surname(const char * source, char * output){
     while (((c = *(source + i)) != '\0') && (ncons < 3) ){
 
 	if ( !is_vowel( c )){
-	    /* letter is not a vowel: if it's not a white space too (aka it's a
-	       consonant) put it in the output */  
-	    if( c != ' ') {
-		*(output + ncons++) = c;
-	    }
+	    /* consonant: put it in the output */
+	    *(output + ncons++) = c;
 	} else {
 	    /* letter is a vowel: put in the vowel buffer (if not already
 	       full) */
@@ -100,11 +97,8 @@ static char * extract_name(const char * source, char * output){
     while (((c = *(source + i)) != '\0') && (ncons < 4) ){
 
 	if ( !is_vowel( c )){
-	    /* letter is not a vowel: if it's not a white space too (aka it's a
-	       consonant) put it in the consonants */  
-	    if( c != ' ' ) {
-		*(consonants + ncons++) = c;
-	    }
+	    /* consonant: put it in the consonants */
+	    *(consonants + ncons++) = c;
 	} else {
 	    /* letter is a vowel: put in the vowel buffer (if not already
 	       full) */

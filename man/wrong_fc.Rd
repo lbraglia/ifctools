@@ -17,8 +17,8 @@ The function return \code{TRUE} if the fiscal code is wrong,
 The function performs fiscal codes check (both regular and temporary
 ones), computing the last (control) character basing on the others.  The
 algorithm is intended to be quite "draconian", so you'll better make
-some precleaning (remove blank spaces and upcase) if needed. See
-examples.
+some pre-cleaning (keep only alphabetic characters and uppercase) if
+needed. See examples.
 }
 \examples{
 fc <- c(NA, "qWeASd34D12h 221M   ", " 12312312312 ")

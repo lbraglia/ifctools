@@ -4,7 +4,7 @@
 \name{ifctools}
 \alias{ifctools}
 \alias{ifctools-package}
-\title{Miscellaneous utils for italian fiscal codes}
+\title{Miscellaneous utils for Italian fiscal codes}
 \description{
 These package provide tools to deal with fiscal codes: a function
 to check if the fiscal code is valid (\code{\link{wrong_fc}}) and
@@ -26,7 +26,7 @@ country code), an arbitrary changing of a tax code, as well as cases
 where a code is incorrect, but still valid (because provided by the tax
 office)."
 
-For more infos see
+For more info see
 \url{http://en.wikipedia.org/wiki/Italian_fiscal_code_card}.
 }
 

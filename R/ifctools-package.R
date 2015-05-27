@@ -1,4 +1,4 @@
-#' Miscellaneous utils for italian fiscal codes
+#' Miscellaneous utils for Italian fiscal codes
 #'
 #' These package provide tools to deal with fiscal codes: a function
 #' to check if the fiscal code is valid (\code{\link{wrong_fc}}) and
@@ -19,7 +19,7 @@
 #' where a code is incorrect, but still valid (because provided by the tax
 #' office)."
 #'
-#' For more infos see
+#' For more info see
 #' \url{http://en.wikipedia.org/wiki/Italian_fiscal_code_card}.
 #'
 #' @name ifctools

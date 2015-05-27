@@ -4,7 +4,7 @@
 \alias{guess_fc}
 \title{Guess Italian Fiscal Code}
 \usage{
-guess_fc(surname = NULL, name = NULL, birthdate = NULL, female = NULL,
+guess_fc(surname = NULL, name = NULL, birth_date = NULL, female = NULL,
   codice_catastale = NULL)
 }
 \arguments{
@@ -12,19 +12,19 @@ guess_fc(surname = NULL, name = NULL, birthdate = NULL, female = NULL,
 
 \item{name}{character, names}
 
-\item{birthdate}{Date, date of birth}
+\item{birth_date}{Date, date of birth}
 
 \item{female}{logical, female indicator variable (\code{FALSE} = man,
 \code{TRUE} = woman)}
 
-\item{codice_catastale}{italian 'codice catastale' (an identifier) of
+\item{codice_catastale}{Italian 'codice catastale' (an identifier) of
 the 'comune' of birth}
 }
 \value{
 The function return a character vector of fiscal code.
 }
 \description{
-The function tryies to guess regular fiscal code, extracting relevant
+The function tries to guess regular fiscal code, extracting relevant
 alphanumeric digits from surname, name, birth date, gender and 'codice
 catastale' (computing the last character, the control digit).
 }

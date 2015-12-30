@@ -47,7 +47,7 @@ guess_fc <- function(surname = NULL,
   Len <- unlist(lapply(list(surname, name, birth_date,
                             female, codice_catastale),
                 length))
-  if (var(Len) > 0){
+  if (stats::var(Len) > 0){
     stop("all vector must be of the same length")
   }
   

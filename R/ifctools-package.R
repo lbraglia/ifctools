@@ -25,4 +25,5 @@
 #' @name ifctools
 #' @docType package
 #' @useDynLib ifctools
+#' @importFrom stats var
 NULL

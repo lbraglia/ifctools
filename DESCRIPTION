@@ -1,14 +1,16 @@
 Package: ifctools
 Title: Italian Fiscal Code ('Codice Fiscale') Utilities
-Version: 0.3.1
-Date: 2015-05-27
-Authors@R: person("Luca", "Braglia", email = "lbraglia@gmail.com",
-	          role = c("aut", "cre"))
-Description: Provides utility functions to deal with Italian fiscal code
-             ('codice fiscale').
+Version: 0.3.2
+Authors@R: person("Luca", "Braglia", email = "lbraglia@gmail.com", role
+        = c("aut", "cre"))
+Description: Provides utility functions to deal with Italian fiscal
+    code ('codice fiscale').
 URL: http://github.com/lbraglia/ifctools
 BugReports: http://github.com/lbraglia/ifctools/issues
-Depends: R (>= 3.1.1)
+Depends:
+    R (>= 3.1.1)
 License: GPL-3
 LazyData: true
-Suggests: testthat
+Suggests:
+    testthat
+RoxygenNote: 5.0.1

@@ -1,7 +1,7 @@
 Package: ifctools
 Title: Italian Fiscal Code ('Codice Fiscale') Utilities
 Version: 0.3.2
-Authors@R: person("Luca", "Braglia", email = "lbraglia@mailbox.org", role
+Authors@R: person("Luca", "Braglia", email = "lbraglia@gmail.com", role
         = c("aut", "cre"))
 Description: Provides utility functions to deal with Italian fiscal
     code ('codice fiscale').

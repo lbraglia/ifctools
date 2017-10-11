@@ -1,4 +1,4 @@
-#ifctools
+# ifctools
 
 [![Linux Build Status](https://travis-ci.org/lbraglia/ifctools.svg?branch=master)](https://travis-ci.org/lbraglia/ifctools)
 [![](http://www.r-pkg.org/badges/version/ifctools)](http://www.r-pkg.org/pkg/ifctools)

@@ -4,8 +4,13 @@
 \alias{guess_fc}
 \title{Guess Italian Fiscal Code}
 \usage{
-guess_fc(surname = NULL, name = NULL, birth_date = NULL, female = NULL,
-  codice_catastale = NULL)
+guess_fc(
+  surname = NULL,
+  name = NULL,
+  birth_date = NULL,
+  female = NULL,
+  codice_catastale = NULL
+)
 }
 \arguments{
 \item{surname}{character, surname}
@@ -40,4 +45,3 @@ Comune_of_birth <- c("F205", # milan
 guess_fc(Surnames, Names, Birthdates, Female, Comune_of_birth)
 
 }
-

@@ -135,7 +135,7 @@ static char * extract_name(const char * source, char * output){
 }
 
 static char * extract_year(const int year, char * output){
-    sprintf(output, "%2d", year % (year < 2000 ? 1900 : 2000) );
+    sprintf(output, "%02d", year % 100);
     return output;
 }
 

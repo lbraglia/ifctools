@@ -3,7 +3,6 @@
 \docType{package}
 \name{ifctools}
 \alias{ifctools}
-\alias{ifctools-package}
 \title{Miscellaneous utils for Italian fiscal codes}
 \description{
 These package provide tools to deal with fiscal codes: a function
@@ -29,4 +28,3 @@ office)."
 For more info see
 \url{http://en.wikipedia.org/wiki/Italian_fiscal_code_card}.
 }
-

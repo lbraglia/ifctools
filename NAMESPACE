@@ -3,4 +3,4 @@
 export(guess_fc)
 export(wrong_fc)
 importFrom(stats,var)
-useDynLib(ifctools)
+useDynLib(ifctools, .registration = TRUE)

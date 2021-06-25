@@ -26,5 +26,5 @@ where a code is incorrect, but still valid (because provided by the tax
 office)."
 
 For more info see
-\url{http://en.wikipedia.org/wiki/Italian_fiscal_code_card}.
+\url{https://en.wikipedia.org/wiki/Italian_fiscal_code_card}.
 }

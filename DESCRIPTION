@@ -1,6 +1,6 @@
 Package: ifctools
 Title: Italian Fiscal Code ('Codice Fiscale') Utilities
-Version: 0.3.3
+Version: 0.3.4
 Authors@R: person("Luca", "Braglia", email = "lbraglia@gmail.com", role
         = c("aut", "cre"))
 Description: Provides utility functions to deal with Italian fiscal
@@ -13,3 +13,4 @@ License: GPL-3
 Suggests:
     testthat
 RoxygenNote: 7.1.1
+Encoding: UTF-8

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "reg_check_digit.h"
 #include "reg_guess_fc_worker.h"
 
@@ -135,7 +136,8 @@ static char * extract_name(const char * source, char * output){
 }
 
 static char * extract_year(const int year, char * output){
-    sprintf(output, "%02d", year % 100);
+    /* below 3 because of 2 + terminating null*/
+    snprintf(output, 3, "%02u", year % 100);
     return output;
 }
 
@@ -163,6 +165,7 @@ static char * extract_month(const int month, char * output){
 
 
 char * extract_day(const int day, const int female, char * output){
-    sprintf(output, "%02d", day + 40 * (female != 0));
+    /* below 3 because of 2 + terminating null*/
+    snprintf(output, 3, "%02u", day + 40 * (female != 0));
     return output;
 }

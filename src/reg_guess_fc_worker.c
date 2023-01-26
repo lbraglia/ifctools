@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
 #include "reg_check_digit.h"
 #include "reg_guess_fc_worker.h"
 

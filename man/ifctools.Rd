@@ -3,6 +3,7 @@
 \docType{package}
 \name{ifctools}
 \alias{ifctools}
+\alias{ifctools-package}
 \title{Miscellaneous utils for Italian fiscal codes}
 \description{
 These package provide tools to deal with fiscal codes: a function
@@ -28,3 +29,16 @@ office)."
 For more info see
 \url{https://en.wikipedia.org/wiki/Italian_fiscal_code_card}.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/lbraglia/ifctools}
+  \item Report bugs at \url{https://github.com/lbraglia/ifctools/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Luca Braglia \email{lbraglia@gmail.com}
+
+}
+\keyword{internal}

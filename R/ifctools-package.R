@@ -23,7 +23,7 @@
 #' \url{https://en.wikipedia.org/wiki/Italian_fiscal_code_card}.
 #'
 #' @name ifctools
-#' @docType package
 #' @useDynLib ifctools, .registration = TRUE
 #' @importFrom stats var
-NULL
+#' @keywords internal 
+"_PACKAGE"
